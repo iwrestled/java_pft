@@ -7,32 +7,17 @@ public class MyFirstProgram {
         hello("user");
         hello("Dmirtiy");
 
-        double l = 5;
-        System.out.println("Площадь квадрата со стороной " + l + " = " + area(l));
+        Square s = new Square(5);
+        System.out.println("Площадь квадрата со стороной " + s.l + " = " + s.area());
 
-        double f = 4;
-        double g = 10;
-        double h = 10;
-        System.out.println("Площадь треугольника со сторонами " + f + " и " + g + " и " + h + " = " + area(f,g,h));
+        Rectangle r = new Rectangle(4,6);
+        System.out.println("Площадь прямоугольника со сторонами " + r.a + " и " + r.b + " = " + r.area());
 
-        double t = 8;
-        double y = 9;
-        System.out.println("Площадь прямоугольника со сторонами " + t + " и " + y + " = " + area(t,y));
+
     }
     public static void hello(String somebody) {
         System.out.println("Hello " + somebody + " !");
     }
-    public static double area(double len) {
-        return len * len;
 
-    }
-    public static double area(double a,double b) {
-        return a * b;
-
-    }
-    public static double area(double a,double b,double c) {
-        return a * b * c;
-
-    }
 
 }
