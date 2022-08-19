@@ -5,6 +5,6 @@ public class MainPoint {
         Point p1 = new Point(5,3);
         Point p2 = new Point(3,-1);
 
-        System.out.println("Расстояние между точками = " + p1.distance(p1,p2));
+        System.out.println("Расстояние между точками = " + p1.distance(p2));
     }
 }

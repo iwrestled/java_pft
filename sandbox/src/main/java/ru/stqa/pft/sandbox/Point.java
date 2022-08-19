@@ -8,9 +8,9 @@ public class Point {
         this.y = y;
     }
 
-    public double distance (Point p1,Point p2) {
-        double diffX = (p2.x - p1.x) * (p2.x - p1.x);
-        double diffY = (p2.y - p1.y) * (p2.y - p1.y);
+    public double distance(Point p2) {
+        double diffX = (p2.x - this.x) * (p2.x - this.x);
+        double diffY = (p2.y - this.y) * (p2.y - this.y);
         return Math.sqrt(diffX + diffY);
     }
 
