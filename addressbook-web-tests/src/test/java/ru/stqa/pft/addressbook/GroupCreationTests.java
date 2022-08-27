@@ -31,7 +31,7 @@ public class GroupCreationTests {
 
         gotoGroupPage();
         initGroupCreation();
-        fillGroupForm(new GroupData("AutoCreateGroup3", "header text", "Footer text"));
+        fillGroupForm(new GroupData("AutoCreateGroup4", "header text", "Footer text"));
         submitGroupCreation();
         gotoGroupPage();
         logout();
