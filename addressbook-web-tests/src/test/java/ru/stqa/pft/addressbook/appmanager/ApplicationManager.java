@@ -16,11 +16,13 @@ public class ApplicationManager {
     public void init() {
         wd = new ChromeDriver();
         wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+        wd.get("http://localhost/addressbook/");
         groupHelper = new GroupHelper(wd);
         navigationHelper = new NavigationHelper(wd);
         sessionHelper = new SessionHelper(wd);
         sessionHelper.login("admin", "secret");
     }
+
     public void logout() {
         wd.findElement(By.linkText("Logout")).click();
     }
@@ -38,28 +40,19 @@ public class ApplicationManager {
         }
     }
 
-    private boolean isAlertPresent() {
-        try {
-            wd.switchTo().alert();
-            return true;
-        } catch (NoAlertPresentException e) {
-            return false;
-        }
-    }
-
     public void submitContactCreation() {
-      wd.findElement(By.name("submit")).click();
+        wd.findElement(By.name("submit")).click();
     }
 
     public void fillContactForm(ContactData contactData) {
-      wd.findElement(By.name("firstname")).sendKeys(contactData.getFirstName());
-      wd.findElement(By.name("middlename")).sendKeys(contactData.getMiddleName());
-      wd.findElement(By.name("lastname")).sendKeys(contactData.getLastName());
-      wd.findElement(By.name("email")).sendKeys(contactData.getEmail());
+        wd.findElement(By.name("firstname")).sendKeys(contactData.getFirstName());
+        wd.findElement(By.name("middlename")).sendKeys(contactData.getMiddleName());
+        wd.findElement(By.name("lastname")).sendKeys(contactData.getLastName());
+        wd.findElement(By.name("email")).sendKeys(contactData.getEmail());
     }
 
     public void gotoAddNewContact() {
-      wd.findElement(By.linkText("add new")).click();
+        wd.findElement(By.linkText("add new")).click();
     }
 
     public GroupHelper getGroupHelper() {
