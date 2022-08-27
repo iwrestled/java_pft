@@ -20,6 +20,26 @@ public class ContactHelper extends HelperBase{
         type(By.name("lastname"),contactData.getLastName());
         type(By.name("email"),contactData.getEmail());
     }
+
+    public void selectContactInList() {
+        click(By.name("selected[]"));
+    }
+
+    public void deleteSelectedContact() {
+        click((By.xpath("//input[@value='Delete']")));
+    }
+
+    public void initContactModification() {
+        click((By.xpath("//img[@alt='Edit']")));
+    }
+
+    public void submitContactModification() {
+        click(By.name("update"));
+    }
+
+    public void returnHomePage() {
+        click(By.linkText("home page"));
+    }
 // перенес в navigationHelper
 //    public void gotoAddNewContact() {
 //        click(By.linkText("add new"));
