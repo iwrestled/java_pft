@@ -2,13 +2,13 @@ package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-import ru.stqa.pft.addressbook.model.ContactData;
 
 import java.time.Duration;
 
 public class ApplicationManager {
     WebDriver wd;
 
+    private ContactHelper contactHelper;
     private SessionHelper sessionHelper;
     private NavigationHelper navigationHelper;
     private GroupHelper groupHelper;
@@ -20,6 +20,7 @@ public class ApplicationManager {
         groupHelper = new GroupHelper(wd);
         navigationHelper = new NavigationHelper(wd);
         sessionHelper = new SessionHelper(wd);
+        contactHelper = new ContactHelper(wd);
         sessionHelper.login("admin", "secret");
     }
 
@@ -40,26 +41,15 @@ public class ApplicationManager {
         }
     }
 
-    public void submitContactCreation() {
-        wd.findElement(By.name("submit")).click();
-    }
-
-    public void fillContactForm(ContactData contactData) {
-        wd.findElement(By.name("firstname")).sendKeys(contactData.getFirstName());
-        wd.findElement(By.name("middlename")).sendKeys(contactData.getMiddleName());
-        wd.findElement(By.name("lastname")).sendKeys(contactData.getLastName());
-        wd.findElement(By.name("email")).sendKeys(contactData.getEmail());
-    }
-
-    public void gotoAddNewContact() {
-        wd.findElement(By.linkText("add new")).click();
-    }
-
     public GroupHelper getGroupHelper() {
         return groupHelper;
     }
 
     public NavigationHelper getNavigationHelper() {
         return navigationHelper;
+    }
+
+    public ContactHelper getContactHelper() {
+        return contactHelper;
     }
 }
