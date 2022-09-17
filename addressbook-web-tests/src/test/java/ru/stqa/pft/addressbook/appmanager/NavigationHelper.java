@@ -9,11 +9,6 @@ public class NavigationHelper extends HelperBase{
         super(wd);
     }
 
-
-    public void gotoAddNewContact() {
-        click(By.linkText("add new"));
-    }
-
     public void gotoMainPage() {
         if (isElementPresent(By.id("maintable"))){
             return;

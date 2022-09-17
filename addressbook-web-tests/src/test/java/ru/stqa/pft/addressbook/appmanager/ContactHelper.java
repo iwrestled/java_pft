@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.GroupData;
 
 public class ContactHelper extends HelperBase{
 
@@ -48,8 +49,17 @@ public class ContactHelper extends HelperBase{
     public void returnHomePage() {
         click(By.linkText("home page"));
     }
-// перенес в navigationHelper
-//    public void gotoAddNewContact() {
-//        click(By.linkText("add new"));
-//    }
+
+    public void createContact(ContactData contact) {
+        gotoAddNewContact();
+        fillContactForm((contact),true);
+        submitContactCreation();
+    }
+    public void gotoAddNewContact() {
+        click(By.linkText("add new"));
+    }
+
+    public boolean isThereAContact() {
+        return isElementPresent(By.name("selected[]"));
+    }
 }
