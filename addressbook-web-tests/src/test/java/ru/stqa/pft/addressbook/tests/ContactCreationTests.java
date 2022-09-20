@@ -14,6 +14,11 @@ public class ContactCreationTests extends TestBase{
     app.getNavigationHelper().gotoMainPage();
     int before = app.getContactHelper().getContactCount();
     app.getContactHelper().gotoAddNewContact();
+    if (! app.getContactHelper().isGroupExists()){        
+      app.getGroupHelper().gotoGroupPage();
+      app.getGroupHelper().createGroup(new GroupData("ChangedName", null, null));
+      app.getContactHelper().gotoAddNewContact();
+    }
     app.getContactHelper().fillContactForm(new ContactData("TestFirstName", "TestMiddleName", "TestLastName", "test@test.com","ChangedName"),true);
     app.getContactHelper().submitContactCreation();
     app.getContactHelper().returnHomePage();
