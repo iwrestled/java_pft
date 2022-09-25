@@ -12,9 +12,9 @@ public class ContactCreationTests extends TestBase{
   @Test
   public void testContactCreation() throws Exception {
     app.getNavigationHelper().gotoMainPage();
-    int before = app.getContactHelper().getContactCount();
+    List<ContactData> before = app.getContactHelper().getContactList();
     app.getContactHelper().gotoAddNewContact();
-    if (! app.getContactHelper().isGroupExists()){        
+    if (! app.getContactHelper().isGroupExists()){
       app.getGroupHelper().gotoGroupPage();
       app.getGroupHelper().createGroup(new GroupData("ChangedName", null, null));
       app.getContactHelper().gotoAddNewContact();
@@ -22,9 +22,9 @@ public class ContactCreationTests extends TestBase{
     app.getContactHelper().fillContactForm(new ContactData("TestFirstName", "TestMiddleName", "TestLastName", "test@test.com","ChangedName"),true);
     app.getContactHelper().submitContactCreation();
     app.getContactHelper().returnHomePage();
-    int after = app.getContactHelper().getContactCount();
-    Assert.assertEquals(after,before +1);
+    List<ContactData> after = app.getContactHelper().getContactList();
+    System.out.println(after);
+    Assert.assertEquals(after.size(),before.size() +1);
 
   }
-
 }
