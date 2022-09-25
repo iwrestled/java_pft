@@ -71,18 +71,22 @@ public class ContactHelper extends HelperBase{
         return wd.findElements(By.name("selected[]")).size();
     }
 
-    public ArrayList<ContactData> getContactList() {
-        ArrayList<ContactData> contacts = new ArrayList<ContactData>();
-        List<WebElement> cells = wd.findElements(By.tagName("td"));
-        for (WebElement element : cells) {
-                String firstName = element[3].getText();
-              //  String lastName = cells[2].getText();
+    public List<ContactData> getContactList() {
+        List<ContactData> contacts = new ArrayList<ContactData>();
+        List<WebElement> elements = wd.findElements(By.name("entry"));
+        for (WebElement element : elements) {
+            for () {
+                List<WebElement> cells = element.findElements(By.tagName("td"));
+                String firstName = cells[3].getText();
+                //  String lastName = cells[2].getText();
                 //    int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
                 ContactData contact = new ContactData(firstName, null, null, null, null);
                 contacts.add(contact);
             }
-        return contacts;
+            return contacts;
+        }
     }
+
 
     public boolean isGroupExists() {
         return isElementPresent(By.xpath("//*[.='ChangedName']"));
