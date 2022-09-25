@@ -23,7 +23,6 @@ public class ContactCreationTests extends TestBase{
     app.getContactHelper().submitContactCreation();
     app.getContactHelper().returnHomePage();
     List<ContactData> after = app.getContactHelper().getContactList();
-    System.out.println(after);
     Assert.assertEquals(after.size(),before.size() +1);
 
   }
