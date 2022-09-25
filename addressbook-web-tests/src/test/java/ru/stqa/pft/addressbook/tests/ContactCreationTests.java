@@ -20,16 +20,18 @@ public class ContactCreationTests extends TestBase{
       app.getGroupHelper().createGroup(new GroupData("ChangedName", null, null));
       app.getContactHelper().gotoAddNewContact();
     }
-    app.getContactHelper().fillContactForm(new ContactData("TestFirstName", "TestMiddleName", "TestLastName", "test@test.com","ChangedName"),true);
+    ContactData contact = new ContactData(before.get(before.size()-1).getId(),"TestFirstName", "TestMiddleName", "TestLastName", "test@test.com","ChangedName");
+    app.getContactHelper().fillContactForm(contact,true);
     app.getContactHelper().submitContactCreation();
     app.getContactHelper().returnHomePage();
     List<ContactData> after = app.getContactHelper().getContactList();
     Assert.assertEquals(after.size(),before.size() +1);
 
     before.add(contact);
-    Comparator<? super GroupData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
+    Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
     before.sort(byId);
     after.sort(byId);
+
     Assert.assertEquals(before,after);
 
   }
