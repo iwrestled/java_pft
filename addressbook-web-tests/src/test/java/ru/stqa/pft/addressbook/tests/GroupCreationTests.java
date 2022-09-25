@@ -15,7 +15,7 @@ public class GroupCreationTests extends TestBase {
         app.getGroupHelper().gotoGroupPage();
         List<GroupData> before = app.getGroupHelper().getGroupList();
         app.getGroupHelper().initGroupCreation();
-        GroupData group = new GroupData(before.get(before.size()-1).getId(),"AutoCreateGroup5", "null", "null");
+        GroupData group = new GroupData(app.getGroupHelper().getGroupsMaxID(before)+1,"AutoCreateGroup5", "null", "null");
         app.getGroupHelper().fillGroupForm(group);
         app.getGroupHelper().submitGroupCreation();
         app.getGroupHelper().gotoGroupPage();

@@ -86,6 +86,15 @@ public class ContactHelper extends HelperBase{
             }
             return contacts;
         }
+
+    public int getContactsMaxID(List<ContactData> contacts) {
+        int max = 0;
+        for (ContactData contact : contacts) {
+            if (contact.getId() > max)
+                max = contact.getId();
+        }
+        return max;
+    }
     public boolean isGroupExists() {
         return isElementPresent(By.xpath("//*[.='ChangedName']"));
     }

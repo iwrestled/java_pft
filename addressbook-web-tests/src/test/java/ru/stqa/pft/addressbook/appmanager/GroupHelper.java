@@ -3,6 +3,7 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.ArrayList;
@@ -79,5 +80,13 @@ public class GroupHelper extends HelperBase{
             groups.add(group);
         }
         return groups;
+    }
+    public int getGroupsMaxID(List<GroupData> groups) {
+        int max = 0;
+        for (GroupData group : groups) {
+            if (group.getId() > max)
+                max = group.getId();
+        }
+        return max;
     }
 }

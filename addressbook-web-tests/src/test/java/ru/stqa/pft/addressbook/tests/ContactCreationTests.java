@@ -20,7 +20,7 @@ public class ContactCreationTests extends TestBase{
       app.getGroupHelper().createGroup(new GroupData("ChangedName", null, null));
       app.getContactHelper().gotoAddNewContact();
     }
-    ContactData contact = new ContactData(before.get(before.size()-1).getId(),"TestFirstName", "TestMiddleName", "TestLastName", "test@test.com","ChangedName");
+    ContactData contact = new ContactData(app.getContactHelper().getContactsMaxID(before)+1,"TestFirstName", "TestMiddleName", "TestLastName", "test@test.com","ChangedName");
     app.getContactHelper().fillContactForm(contact,true);
     app.getContactHelper().submitContactCreation();
     app.getContactHelper().returnHomePage();
