@@ -17,7 +17,7 @@ public class ContactCreationTests extends TestBase{
     app.getContactHelper().gotoAddNewContact();
     if (! app.getContactHelper().isGroupExists()){
       app.getGroupHelper().gotoGroupPage();
-      app.getGroupHelper().createGroup(new GroupData("ChangedName", null, null));
+      app.getGroupHelper().createGroup(new GroupData("ChangedName", "AutoCreatedInContacts", null));
       app.getContactHelper().gotoAddNewContact();
     }
     ContactData contact = new ContactData(app.getContactHelper().getContactsMaxID(before)+1,"TestFirstName", "TestMiddleName", "TestLastName", "test@test.com","ChangedName");
