@@ -13,12 +13,12 @@ public class ContactCreationTests extends TestBase{
 
   @Test
   public void testContactCreation() throws Exception {
-    app.getNavigationHelper().gotoMainPage();
+    app.goTo().gotoMainPage();
     List<ContactData> before = app.getContactHelper().getContactList();
     app.getContactHelper().gotoAddNewContact();
     if (! app.getContactHelper().isGroupExists()){
-      app.getGroupHelper().gotoGroupPage();
-      app.getGroupHelper().createGroup(new GroupData("ChangedName", "AutoCreatedInContacts", null));
+      app.goTo().groupPage();
+      app.group().create(new GroupData("ChangedName", "AutoCreatedInContacts", null));
       app.getContactHelper().gotoAddNewContact();
     }
     ContactData contact = new ContactData(app.getContactHelper().getContactsMaxID(before)+1,"TestFirstName", "TestMiddleName", "TestLastName", "test@test.com","ChangedName");
