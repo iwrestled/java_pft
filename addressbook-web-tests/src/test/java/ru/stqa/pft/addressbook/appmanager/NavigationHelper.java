@@ -9,7 +9,7 @@ public class NavigationHelper extends HelperBase{
         super(wd);
     }
 
-    public void gotoMainPage() {
+    public void mainPage() {
         if (isElementPresent(By.id("maintable"))){
             return;
         }
