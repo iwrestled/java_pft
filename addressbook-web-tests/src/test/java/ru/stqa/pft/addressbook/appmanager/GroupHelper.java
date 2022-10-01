@@ -53,6 +53,13 @@ public class GroupHelper extends HelperBase{
         gotoGroupPage();
 
     }
+    public void modifyGroup(int index, GroupData group) {
+        selectGroup(index);
+        initGroupModification();
+        fillGroupForm(group);
+        submitGroupModification();
+        gotoGroupPage();
+    }
     public void gotoGroupPage() {
         if (isElementPresent(By.tagName("h1"))
                 && wd.findElement(By.tagName("h1")).getText().equals("Groups")
@@ -89,4 +96,5 @@ public class GroupHelper extends HelperBase{
         }
         return max;
     }
+
 }

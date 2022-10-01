@@ -16,6 +16,9 @@ public class NavigationHelper extends HelperBase{
         click(By.linkText("home"));
     }
 
+    public void logout() {
+        wd.findElement(By.linkText("Logout")).click();
+    }
     public void acceptDialog() {
         wd.switchTo().alert().accept();
     }
