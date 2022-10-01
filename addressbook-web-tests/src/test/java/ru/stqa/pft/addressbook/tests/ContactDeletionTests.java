@@ -5,6 +5,7 @@ import org.testng.annotations.*;
 import ru.stqa.pft.addressbook.model.ContactData;
 
 import java.util.List;
+import java.util.Set;
 
 
 public class ContactDeletionTests extends TestBase {
@@ -12,7 +13,7 @@ public class ContactDeletionTests extends TestBase {
     @BeforeMethod
     public void ensurePreconditions() {
         app.goTo().mainPage();
-        if (app.contact().list().size()==0) {
+        if (app.contact().all().size()==0) {
             app.contact().create(new ContactData()
                     .withFirstName("TestFirstName").withMiddleName("TestMiddleName").withLastName("TestLastName").withEmail("test@test.com").withGroup("ChangedName"));
             app.contact().returnHomePage();
@@ -23,13 +24,19 @@ public class ContactDeletionTests extends TestBase {
     @Test
     public void testContactDeletion() throws Exception {
 
-        List<ContactData> before = app.contact().list();
-        app.contact().selectInList(before.size() -1);
-        app.contact().deleteSelected();
-        app.goTo().acceptDialog();                      // вынести в contacthelper, проблема что часть в контакт, часть в goTo, разнести по разным хелперам?
+        Set<ContactData> before = app.contact().all();
+        ContactData deletedContact = before.iterator().next();
+        app.contact().delete(deletedContact);
+        app.goTo().acceptDialog();
         app.goTo().mainPage();
-        List<ContactData> after = app.contact().list();
+        Set<ContactData> after = app.contact().all();
         Assert.assertEquals(after.size(),before.size() - 1);
+
+        before.remove (deletedContact);
+        Assert.assertEquals(before,after);
+
+
+
     }
 
 
