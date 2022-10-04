@@ -32,8 +32,9 @@ public class ContactCreationTests extends TestBase{
             .withId(app.contact().getContactsMaxID(before)+1).withFirstName("zTestFirstName").withLastName("zTestLastName").withEmail("test@test.com").withGroup("ChangedName");
     app.contact().create(contact);
     app.contact().returnHomePage();
+    assertThat(app.contact().getContactCount(),equalTo(before.size() +1));
     Contacts after = app.contact().all();
-    assertThat(after.size(),equalTo(before.size() +1));
+//    assertThat(after.size(),equalTo(before.size() +1));
 
     assertThat(after, equalTo(
             before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
