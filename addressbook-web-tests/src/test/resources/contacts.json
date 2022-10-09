@@ -1,0 +1,23 @@
+[
+  {
+    "firstName": "testFirstName 0",
+    "middleName": "testMiddleName 0",
+    "lastName": "testLastName 0",
+    "email": "test@email.ru 0",
+    "group": "testGroup 0"
+  },
+  {
+    "firstName": "testFirstName 1",
+    "middleName": "testMiddleName 1",
+    "lastName": "testLastName 1",
+    "email": "test@email.ru 1",
+    "group": "testGroup 1"
+  },
+  {
+    "firstName": "testFirstName 2",
+    "middleName": "testMiddleName 2",
+    "lastName": "testLastName 2",
+    "email": "test@email.ru 2",
+    "group": "testGroup 2"
+  }
+]
