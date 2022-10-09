@@ -35,6 +35,12 @@ public class ContactHelper extends HelperBase{
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
     }
+    public void fillFormFromFile(ContactData contactData, boolean creation) {
+        type(By.name("firstname"), contactData.getFirstName());
+        type(By.name("middlename"), contactData.getMiddleName());
+        type(By.name("lastname"), contactData.getLastName());
+        type(By.name("email"), contactData.getEmail());
+    }
 
     public void selectInList(int index) {
         wd.findElements(By.name("selected[]")).get(index).click();
@@ -68,6 +74,12 @@ public class ContactHelper extends HelperBase{
     public void create(ContactData contact) {
         addNew();
         fillForm((contact),true);
+        submitContactCreation();
+        contactCache=null;
+    }
+    public void createGenerator(ContactData contact) {
+        addNew();
+        fillFormFromFile((contact),true);
         submitContactCreation();
         contactCache=null;
     }

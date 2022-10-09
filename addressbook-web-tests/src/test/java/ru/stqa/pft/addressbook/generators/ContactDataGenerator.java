@@ -85,7 +85,7 @@ public class ContactDataGenerator {
                     .withMiddleName(String.format("testMiddleName %s",i))
                     .withLastName(String.format("testLastName %s",i))
                     .withEmail(String.format("test@email.ru %s",i))
-                    .withGroup(String.format("testGroup %s",i)));   // отсутствие в списке груп?
+                    .withGroup(String.format("test %s",i)));
         }
         return contacts;
     }
