@@ -85,6 +85,8 @@ public class ContactDataGenerator {
                     .withMiddleName(String.format("testMiddleName %s",i))
                     .withLastName(String.format("testLastName %s",i))
                     .withEmail(String.format("test@email.ru %s",i))
+                    .withPhoto((new File(String.format("src/test/resources/stru.jpg",i))))
+//                    .withPhoto(String.format("src/test/resources/stru.jpg",i))
                     .withGroup(String.format("test %s",i)));
         }
         return contacts;
