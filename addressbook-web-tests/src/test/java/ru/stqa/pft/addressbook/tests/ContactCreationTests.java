@@ -35,6 +35,21 @@ public class ContactCreationTests extends TestBase{
     }
   }
 
+  @DataProvider
+  public Iterator<Object[]> validContactsFromJson() throws IOException {
+    try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.json")))){
+      String json = "";
+      String line = reader.readLine();
+      while (line != null){
+        json += line;
+        line=reader.readLine();
+      }
+      Gson gson = new Gson();
+      List<ContactData> contacts = gson.fromJson(json, new TypeToken<List<ContactData>>(){}.getType());
+      return contacts.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();  // Заворачиваем объект в массив
+    }
+  }
+
   @Test
   public void testContactCreation() throws Exception {
     app.goTo().mainPage();
@@ -63,25 +78,7 @@ public class ContactCreationTests extends TestBase{
             before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
   }
 
-  @DataProvider
-  public Iterator<Object[]> validContactsFromJson() throws IOException {
-    BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.json")));
-    String json = "";
-    String line = reader.readLine();
-    while (line != null){
-      json += line;
-      line=reader.readLine();
-    }
-    Gson gson = new Gson();
-    List<ContactData> contacts = gson.fromJson(json, new TypeToken<List<ContactData>>(){}.getType());
-    return contacts.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();  // Заворачиваем объект в массив
-  }
-
-
-
-
-
-  @Test
+  @Test (enabled = false)
   public void testCurrentDir() {
     File currentDir = new File(".");
     System.out.println(currentDir.getAbsolutePath());
