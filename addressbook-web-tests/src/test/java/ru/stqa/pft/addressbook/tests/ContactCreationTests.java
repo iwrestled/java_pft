@@ -53,7 +53,7 @@ public class ContactCreationTests extends TestBase{
   @Test (enabled = false)
   public void testContactCreation() throws Exception {
     app.goTo().mainPage();
-    Contacts before = app.contact().all();
+    Contacts before = app.db().contacts();
     File photo = new File("src/test/resources/stru.jpg");
     ContactData contact = new ContactData()
             .withId(app.contact().getContactsMaxID(before)+1).withFirstName("zTestFirstName").withLastName("zTestLastName").withEmail("test@test.com").withGroup("ChangedName")
@@ -61,7 +61,7 @@ public class ContactCreationTests extends TestBase{
     app.contact().create(contact);
     app.contact().returnHomePage();
     assertThat(app.contact().getContactCount(),equalTo(before.size() +1));
-    Contacts after = app.contact().all();
+    Contacts after = app.db().contacts();
     assertThat(after, equalTo(
             before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
   }
@@ -69,11 +69,11 @@ public class ContactCreationTests extends TestBase{
   @Test (dataProvider = "validContactsFromJson")
   public void testContactCreationGenerator(ContactData contact) throws Exception {
     app.goTo().mainPage();
-    Contacts before = app.contact().all();
+    Contacts before = app.db().contacts();
     app.contact().createGenerator(contact);
     app.contact().returnHomePage();
     assertThat(app.contact().getContactCount(),equalTo(before.size() +1));
-    Contacts after = app.contact().all();
+    Contacts after = app.db().contacts();
     assertThat(after, equalTo(
             before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
   }
