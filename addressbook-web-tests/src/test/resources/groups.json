@@ -3,10 +3,5 @@
     "name": "test 0",
     "header": "header\n0",
     "footer": "footer\n0"
-  },
-  {
-    "name": "test 1",
-    "header": "header\n1",
-    "footer": "footer\n1"
   }
 ]
