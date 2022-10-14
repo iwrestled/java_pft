@@ -31,15 +31,6 @@ public class ContactCreationTests extends TestBase{
       app.group().newGroup();
       app.group().create(new GroupData().withName("test 0"));
     }
-
-//    app.goTo().mainPage();
-//    app.contact().addNew();
-//    if (! app.contact().isGroupExists()){
-//     app.goTo().groupPage();
-//      app.group().newGroup();
-//      app.group().create(new GroupData().withName("ChangedName").withHeader("AutoCreatedInContacts"));
-//      app.goTo().mainPage();
-//    }
   }
 
   @DataProvider
@@ -64,7 +55,9 @@ public class ContactCreationTests extends TestBase{
     Contacts before = app.db().contacts();
     File photo = new File("src/test/resources/stru.jpg");
     ContactData contact = new ContactData()
-            .withId(app.contact().getContactsMaxID(before)+1).withFirstName("zTestFirstName").withLastName("zTestLastName").withEmail("test@test.com").withGroup("test 0")
+            .withId(app.contact().getContactsMaxID(before)+1).withFirstName("zTestName").withMiddleName("zTestMiddleName")
+            .withLastName("zTestLastName").withEmail("zTest@test.com")
+            .inGroup(groups.iterator().next())
             .withPhoto(photo);
     app.contact().create(contact);
     app.contact().returnHomePage();

@@ -228,4 +228,9 @@ public class ContactData {
     public int hashCode() {
         return Objects.hash(id, firstName, middleName, lastName, email);
     }
+
+    public ContactData inGroup(GroupData group) {
+        groups.add(group);
+        return this;
+    }
 }
