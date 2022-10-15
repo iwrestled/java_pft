@@ -7,7 +7,6 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
-import ru.stqa.pft.addressbook.model.Groups;
 
 import java.util.List;
 import java.util.Set;
@@ -52,6 +51,36 @@ public class ContactHelper extends HelperBase{
     public void selectInListById(int id) {
         wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
     }
+
+    public void addGroup() {
+        click((By.xpath("//input[@value='Add to']")));
+    }
+
+    public void proceedToContactsWithGroup(int id) {
+        wd.findElement(By.xpath("//a[@href='./?group=" + id + "']")).click(); // обрабатывать ли ID
+    }
+
+    public void proceedToContactsWithGroupTest() {
+        wd.findElement(By.xpath("//*[@id=\"content\"]/div/i/a")).click();
+    }
+
+    public void groupAdding(ContactData contact) {
+        selectInListById(contact.getId());
+        addGroup();
+        proceedToContactsWithGroupTest();
+    }
+
+    public void removeGroup() {
+        click((By.xpath("//input[@name='remove']")));
+    }
+
+    public void removeAddedGroup(ContactData contactGroup) {
+        selectInListById(contactGroup.getId());
+        removeGroup();
+        proceedToContactsWithGroupTest();
+
+    }
+
 
     public void deleteSelected() {
         click((By.xpath("//input[@value='Delete']")));
@@ -188,4 +217,7 @@ public class ContactHelper extends HelperBase{
                 .withAddress(address);
 
     }
+
+
+
 }
