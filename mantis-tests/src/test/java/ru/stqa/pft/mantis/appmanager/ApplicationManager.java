@@ -1,7 +1,6 @@
 package ru.stqa.pft.mantis.appmanager;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -13,6 +12,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
     private final Properties properties;
@@ -37,7 +37,7 @@ public class ApplicationManager {
         } else if (browser.equals(BrowserType.IE)) {
             wd = new InternetExplorerDriver();
         }
-        wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
+        wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
         wd.get(properties.getProperty("web.baseUrl"));
     }
 
