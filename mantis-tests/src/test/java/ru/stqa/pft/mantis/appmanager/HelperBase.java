@@ -1,4 +1,4 @@
-package ru.stqa.pft.addressbook.appmanager;
+package ru.stqa.pft.mantis.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
@@ -9,10 +9,12 @@ import java.io.File;
 
 public class HelperBase {
 
+    protected ApplicationManager app;
     protected WebDriver wd;
 
-    public HelperBase(WebDriver wd) {
-        this.wd = wd;
+    public HelperBase(ApplicationManager app) {  //отличается в лекции 8.6
+        this.app = app;
+        this.wd = app.getDriver();
     }
 
     protected void click(By locator) {
