@@ -13,7 +13,9 @@ import static org.testng.Assert.assertTrue;
     @Test
     public void testLogin() throws IOException {
         HttpSession session = app.newSession();
-        assertTrue(session.login("administrator","root"));
-        assertTrue(session.isLoggedInAs("administrator"));
+//        assertTrue(session.login("administrator","root"));
+//        assertTrue(session.isLoggedInAs("administrator"));
+        assertTrue(session.login("user1670775582275","password"));
+        assertTrue(session.isLoggedInAs("user1670775582275"));
     }
 }
