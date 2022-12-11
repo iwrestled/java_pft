@@ -6,6 +6,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.query.Query;
+import ru.stqa.pft.mantis.model.UserData;
 
 
 import java.util.List;
@@ -38,46 +40,25 @@ public class DbHelper {
         }
 
 
-/*   public Contacts contacts(){
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        List<ContactData> result = session.createQuery( "from ContactData where deprecated = '0000-00-00'" ).list();
-        session.getTransaction().commit();
-        session.close();
-        return new Contacts(result);
-    }
-    public ContactData getContactById(int id) {
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        ContactData contact = (ContactData) session
-                .createQuery("from ContactData where id = :id")
-                .setParameter("id", id)
-                .getSingleResult();
-        session.getTransaction().commit();
-        session.close();
-        return contact;
 
+    public UserData getUserInfo() {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+//        List<UserData> result = session.createQuery("from UserData where id=(select max(id) from UserData" ).list();
+        Query query = session.createQuery("from UserData  order by id desc");
+        query.setMaxResults(1);
+        UserData userData = (UserData) query.getSingleResult();
+        session.getTransaction().commit();
+        session.close();
+        return userData;
     }
-    public GroupData getGroupById(int id) {
+
+/*    public  getUserData(int id,String user,String email) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         GroupData contact = (GroupData) session
                 .createQuery("from GroupData where id = :id")
                 .setParameter("id", id)
-                .getSingleResult();
-        session.getTransaction().commit();
-        session.close();
-        return contact;
-
-    }
-
-    public  getUserData(int id,String user,String email) {
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        GroupData contact = (GroupData) session
-                .createQuery("from GroupData where id = :id")
-                .setParameter("id", id)
-                .
                 .getSingleResult();
         session.getTransaction().commit();
         session.close();

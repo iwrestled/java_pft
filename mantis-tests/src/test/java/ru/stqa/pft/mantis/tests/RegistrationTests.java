@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 import ru.lanwen.verbalregex.VerbalExpression;
 import ru.stqa.pft.mantis.model.MailMessage;
 
+
 import javax.mail.MessagingException;
 import java.io.IOException;
 import java.util.List;
@@ -33,6 +34,7 @@ public class RegistrationTests extends TestBase{
         String confirmationLink = findConfirmationLink(mailMessages, email);
         app.registration().finish(confirmationLink, password);
         assertTrue(app.newSession().login(user,password));
+        assertTrue(app.newSession().isLoggedInAs(user));
     }
 
     private String findConfirmationLink(List<MailMessage> mailMessages, String email) {
