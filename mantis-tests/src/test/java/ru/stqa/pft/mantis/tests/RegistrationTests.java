@@ -5,6 +5,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.lanwen.verbalregex.VerbalExpression;
+import ru.stqa.pft.mantis.appmanager.HttpSession;
 import ru.stqa.pft.mantis.model.MailMessage;
 
 
@@ -33,8 +34,9 @@ public class RegistrationTests extends TestBase{
         List<MailMessage> mailMessages = app.james().waitForMail(user,password,60000);
         String confirmationLink = findConfirmationLink(mailMessages, email);
         app.registration().finish(confirmationLink, password);
-        assertTrue(app.newSession().login(user,password));
-        assertTrue(app.newSession().isLoggedInAs(user));
+        HttpSession session = app.newSession();
+        assertTrue(session.login(user,password));
+        assertTrue(session.isLoggedInAs(user));
     }
 
     private String findConfirmationLink(List<MailMessage> mailMessages, String email) {

@@ -43,7 +43,7 @@ public class PasswordChangeTests extends TestBase{
     Thread.sleep(3500);
     HttpSession session = app.newSession();
     assertTrue(session.login(user,password));
-//    assertTrue(session.isLoggedInAs("user"));  // проверка входа
+    assertTrue(session.isLoggedInAs(user));
     }
 
    private String findConfirmationLink(List<MailMessage> mailMessages, String email) {
