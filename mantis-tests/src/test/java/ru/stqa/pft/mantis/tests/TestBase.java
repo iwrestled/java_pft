@@ -1,6 +1,7 @@
 package ru.stqa.pft.mantis.tests;
 
 import org.openqa.selenium.remote.BrowserType;
+import org.testng.SkipException;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import ru.stqa.pft.mantis.appmanager.ApplicationManager;
@@ -24,4 +25,23 @@ public class TestBase {
         app.ftp().restore("config_inc.php.bak","config_inc.php");
         app.stop();
     }
+
+/*    public boolean isIssueOpen(int issueid) {
+        issueid = app.soap().
+        try {
+            wd.findElement(by);
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+
+
+    public void skipIfNotFixed(int issueId) {
+        if (isIssueOpen(issueId)) {
+            throw new SkipException("Ignored because of issue " + issueId);
+        }
+    }
+
+ */
 }

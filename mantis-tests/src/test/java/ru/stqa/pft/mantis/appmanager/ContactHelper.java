@@ -11,7 +11,7 @@ public class ContactHelper extends HelperBase{
 
 
     public void chooseContact(){
-        wd.findElement(By.xpath("//a[@href='manage_user_edit_page.php?user_id=9']")).click();  // хардкодом берем с определнным айди
+        wd.findElement(By.xpath("//a[@href='manage_user_edit_page.php?user_id=9']")).click();
     }
     public void chooseContactById(int id) {
 //        wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
