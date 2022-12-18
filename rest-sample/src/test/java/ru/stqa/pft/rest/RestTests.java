@@ -8,6 +8,7 @@ import org.apache.http.client.fluent.Executor;
 import org.apache.http.client.fluent.Request;
 import org.apache.http.message.BasicNameValuePair;
 import org.testng.Assert;
+import org.testng.SkipException;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -20,6 +21,7 @@ public class RestTests {
 
     @Test
     public void testCreateIssue() throws IOException {
+        skipIfNotFixed(1);
         Set<Issue> oldIssues = getIssues();
         Issue newIssue = new Issue().withSubject("Test issue my 2").withDescription("Test description my 2");
         int issueId = createIssue(newIssue);
@@ -36,12 +38,13 @@ public class RestTests {
         return new Gson().fromJson(issues,new TypeToken<Set<Issue>>(){}.getType());
     }
 
-    private Set<Issue> getIssuesById() throws IOException {
-        String json = getExecutor().execute(Request.Get("https://bugify.stqa.ru/api/issues.json"))
+    private Issue getIssueById(int issueid) throws IOException {
+        String json = getExecutor().execute(Request.Get("https://bugify.stqa.ru/api/issues/" + issueid + ".json"))
                 .returnContent().asString();
         JsonElement parsed = new JsonParser().parse(json);
         JsonElement issues = parsed.getAsJsonObject().get("issues");
-        return new Gson().fromJson(issues,new TypeToken<Set<Issue>>(){}.getType());
+        Set<Issue> set = (Set<Issue>) new Gson().fromJson(issues,new TypeToken<Set<Issue>>(){}.getType());
+        return set.iterator().next();
     }
 
     private Executor getExecutor() {
@@ -55,5 +58,17 @@ public class RestTests {
                 .returnContent().asString();
         JsonElement parsed = new JsonParser().parse(json);
         return parsed.getAsJsonObject().get("issue_id").getAsInt();
+    }
+
+    public boolean isIssueOpen(int issueId) throws IOException {
+        Issue issue = getIssueById(issueId);
+        String status = issue.getState_name();
+        return !(status.equals("Resolved") || status.equals("Closed"));
+    }
+
+    public void skipIfNotFixed(int issueId) throws IOException {
+        if (isIssueOpen(issueId)) {
+            throw new SkipException("Ignored because of issue " + issueId);
+        }
     }
 }

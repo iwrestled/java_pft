@@ -5,16 +5,11 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import com.jayway.restassured.RestAssured;
-import org.apache.http.client.fluent.Executor;
-import org.apache.http.client.fluent.Request;
-import org.apache.http.message.BasicNameValuePair;
 import org.testng.SkipException;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.rmi.RemoteException;
 import java.util.Set;
 
 import static org.testng.Assert.assertEquals;
@@ -38,9 +33,6 @@ public class RestAssuredTests {
     }
 
 
- //   public void testCreateIssueID() throws IOException {
-    //       Issue oldIssues = getIssueById(1);
-//    }
 
     private Set<Issue> getIssues() throws IOException {
         String json = RestAssured.get("https://bugify.stqa.ru/api/issues.json").asString();
@@ -52,9 +44,11 @@ public class RestAssuredTests {
         String json = RestAssured.get("https://bugify.stqa.ru/api/issues/" + issueid + ".json").asString();
         JsonElement parsed = new JsonParser().parse(json);
         JsonElement issues = parsed.getAsJsonObject().get("issues");
-        return new Gson().fromJson(issues,new TypeToken<Issue>(){}.getType());
+        Set<Issue> set = (Set<Issue>) new Gson().fromJson(issues,new TypeToken<Set<Issue>>(){}.getType());
+        return set.iterator().next();
     }
-   public boolean isIssueOpen(int issueId) throws IOException {
+
+       public boolean isIssueOpen(int issueId) throws IOException {
         Issue issue = getIssueById(issueId);
         String status = issue.getState_name();
         return !(status.equals("Resolved") || status.equals("Closed"));
@@ -65,6 +59,7 @@ public class RestAssuredTests {
             throw new SkipException("Ignored because of issue " + issueId);
         }
     }
+
     private int createIssue(Issue newIssue) throws IOException {
         String json = RestAssured.given()
                 .parameter("subject",newIssue.getSubject())
